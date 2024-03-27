@@ -1,0 +1,114 @@
+{
+	"files": [
+		{
+			"path": "newsfeed/src/components/Newsfeed.tsx",
+			"bookmarks": [
+				{
+					"line": 16,
+					"column": 15,
+					"label": "Get the initial data at top level"
+				}
+			]
+		},
+		{
+			"path": "newsfeed/src/components/Story.tsx",
+			"bookmarks": [
+				{
+					"line": 23,
+					"column": 30,
+					"label": "1.2. Basic Flow: Reuse the Fragment in the parent"
+				},
+				{
+					"line": 27,
+					"column": 0,
+					"label": "1.3. Basic Flow: Declare the props based with the generated `type`"
+				},
+				{
+					"line": 29,
+					"column": 49,
+					"label": "1.4. Basic Flow: Extract the data with `usefragment`"
+				},
+				{
+					"line": 38,
+					"column": 43,
+					"label": "1.5. Basic Flow:  Bc the `StoryLikeButtonFragment` is based on `Story` at step 1, we need to pass the whole story down"
+				}
+			]
+		},
+		{
+			"path": "newsfeed/src/components/PosterDetailsHovercardContents.tsx",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 25,
+					"label": "inline `fragment` - `type` refinement"
+				},
+				{
+					"line": 45,
+					"column": 16,
+					"label": "Query when component mount: fetch with `useLazyLoadQuery` -> extract with `useFragment` like usual"
+				}
+			]
+		},
+		{
+			"path": "newsfeed/src/components/StoryCommentsSection.tsx",
+			"bookmarks": [
+				{
+					"line": 19,
+					"column": 6,
+					"label": "2.4. Mutation Connection: Need a `key` for new nodes"
+				}
+			]
+		},
+		{
+			"path": "newsfeed/src/components/StoryLikeButton.tsx",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 45,
+					"label": "1.1. Basic Flow: Specifying the data requirements of a component via `fragment`"
+				},
+				{
+					"line": 14,
+					"column": 44,
+					"label": "2.1. Mutation: Declare the GraphQL mutation"
+				},
+				{
+					"line": 30,
+					"column": 59,
+					"label": "1.6. Basic Flow: Extract the data again with `useFragment`"
+				},
+				{
+					"line": 32,
+					"column": 2,
+					"label": "2.2. Mutation: `commit` the change from `useMutation`"
+				},
+				{
+					"line": 48,
+					"column": 27,
+					"label": "2.3. Mutation: Disable the button while the mutation is happening"
+				}
+			]
+		},
+		{
+			"path": "newsfeed/src/components/StoryCommentsComposer.tsx",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 4,
+					"label": "2.5. Mutation Connection: Use `@appendEge/ @prependEge/ @deleteEdge` to specify where should the new mutation goes"
+				},
+				{
+					"line": 46,
+					"column": 59,
+					"label": "2.6. Mutation Connection: Get the connectionID from the `key`"
+				},
+				{
+					"line": 55,
+					"column": 36,
+					"label": "2.7. Mutation Connection: And use it in the commit"
+				}
+			]
+		}
+	]
+}

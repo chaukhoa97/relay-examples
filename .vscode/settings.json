@@ -12,5 +12,6 @@
       "name": "Todo",
       "rootDirectory": "./todo"
     }
-  ]
+  ],
+  "editor.fontSize": 12
 }

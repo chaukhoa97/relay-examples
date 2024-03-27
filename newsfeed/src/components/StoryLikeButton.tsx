@@ -1,13 +1,9 @@
 import * as React from "react";
 import { graphql } from "relay-runtime";
-import { useFragment } from "react-relay";
-
+import { useFragment, useMutation } from "react-relay";
 import type { StoryLikeButtonFragment$key } from "./__generated__/StoryLikeButtonFragment.graphql";
 
-type Props = {
-  story: StoryLikeButtonFragment$key;
-};
-
+// Relay only allows components to access data they specifically ask for in GraphQL fragments, and nothing more.
 const StoryLikeButtonFragment = graphql`
   fragment StoryLikeButtonFragment on Story {
     id
@@ -16,27 +12,44 @@ const StoryLikeButtonFragment = graphql`
   }
 `;
 
-export default function StoryLikeButton({ story }: Props): React.ReactElement {
-  const data = useFragment<StoryLikeButtonFragment$key>(
-    StoryLikeButtonFragment,
-    story
-  );
-  const onLikeButtonClicked = () => {
-    // To be filled in
-  };
+const StoryLikeButtonLikeMutation = graphql`
+  mutation StoryLikeButtonLikeMutation($id: ID!, $doesLike: Boolean!) {
+    likeStory(id: $id, doesLike: $doesLike) {
+      story {
+        ...StoryLikeButtonFragment
+      }
+    }
+  }
+`;
+
+export default function StoryLikeButton({
+  story,
+}: {
+  story: StoryLikeButtonFragment$key;
+}) {
+  // Because `StoryLikeButtonFragment` based on `Story` type, we'll pass the `story` prop to `useFragment` hook
+  const data = useFragment(StoryLikeButtonFragment, story);
+
+  const [commit, isFlight] = useMutation(StoryLikeButtonLikeMutation);
+  function handleLikeButton() {
+    commit({
+      variables: {
+        id: data.id,
+        doesLike: !data.doesViewerLike,
+      },
+    });
+  }
+
   return (
     <div className="likeButton">
-      <LikeCount count={data.likeCount} />
+      <div className="likeButton__count">{data.likeCount} likes</div>;
       <LikeButton
         doesViewerLike={data.doesViewerLike}
-        onClick={onLikeButtonClicked}
+        onClick={handleLikeButton}
+        disabled={isFlight}
       />
     </div>
   );
-}
-
-function LikeCount({ count }: { count: number }) {
-  return <div className="likeButton__count">{count} likes</div>;
 }
 
 function LikeButton({
