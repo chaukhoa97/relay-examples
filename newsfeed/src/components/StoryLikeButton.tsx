@@ -3,7 +3,6 @@ import { graphql } from "relay-runtime";
 import { useFragment, useMutation } from "react-relay";
 import type { StoryLikeButtonFragment$key } from "./__generated__/StoryLikeButtonFragment.graphql";
 
-// Relay only allows components to access data they specifically ask for in GraphQL fragments, and nothing more.
 const StoryLikeButtonFragment = graphql`
   fragment StoryLikeButtonFragment on Story {
     id
@@ -12,7 +11,7 @@ const StoryLikeButtonFragment = graphql`
   }
 `;
 
-const StoryLikeButtonLikeMutation = graphql`
+const LikeButtonMutation = graphql`
   mutation StoryLikeButtonLikeMutation($id: ID!, $doesLike: Boolean!) {
     likeStory(id: $id, doesLike: $doesLike) {
       story {
@@ -27,10 +26,10 @@ export default function StoryLikeButton({
 }: {
   story: StoryLikeButtonFragment$key;
 }) {
-  // Because `StoryLikeButtonFragment` based on `Story` type, we'll pass the `story` prop to `useFragment` hook
+  // 1.4b. Basic Flow: ...to extract the data again with `usefragment`
   const data = useFragment(StoryLikeButtonFragment, story);
 
-  const [commit, isFlight] = useMutation(StoryLikeButtonLikeMutation);
+  const [commit, isFlight] = useMutation(LikeButtonMutation);
   function handleLikeButton() {
     commit({
       variables: {
