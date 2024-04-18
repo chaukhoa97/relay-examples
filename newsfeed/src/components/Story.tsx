@@ -22,9 +22,8 @@ const StoryFragment = graphql`
     thumbnail {
       ...ImageFragment
     }
-    ...StoryCommentsSectionFragment
-    # 1.2. Basic Flow: Reuse the Fragment in the parent
     ...StoryLikeButtonFragment
+    ...StoryCommentsSectionFragment
   }
 `;
 
@@ -35,13 +34,13 @@ export default function Story({ story }: { story: StoryFragment$key }) {
 
   return (
     <Card>
+      {/* 1.3b. Basic Flow: As we declared `StoryLikeButtonFragment` in `StoryFragment`, we know that what contains `StoryLikeButtonFragment` - `data` has all the information (NOT DATA) we need... */}
+      <StoryLikeButton story={data} />
+      <StoryCommentsSection story={data} />
       <PosterByline poster={data.poster} />
       <Heading>{data.title}</Heading>
       <Image image={data.thumbnail} width={400} height={400} />
       <StorySummary summary={data.summary} />
-      <StoryLikeButton story={data} />
-      {/* 1.3b. Basic Flow: As we declared StoryCommentsSectionFragment in the Fragment, we know that what is extracted from `useFragment` - `data` has all the information (NOT DATA) we need... */}
-      <StoryCommentsSection story={data} />
     </Card>
   );
 }
